@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出席管理システム</title>
+</head>
+<body>
+    <h1>出席管理システム</h1>
+ 
+    
+    <h2>出席追加</h2>
+    <form th:action="@{/syusekihyou/}" method="post" onsubmit="return validateForm()" th:object="${syusekihyou}">
+		<label for="syuketu" class="col-4 col-form-label text-end">出欠</label>
+		<div class="col-4">
+			<input type="text" class="form-control" name="syuketu" id="syuketu" required />
+			</div>
+		</div>    
+        <label for="startTime">入力時間:</label>
+        <div class="col-4">
+			<input type="datetime-local" id="syuseki" name="syuseki" required>
+			</div>
+        <br>
+
+        <button type="submit">追加</button>
+    </form>
+ 
+    <script>
+        function validateForm() {
+            var startTimeInput = document.getElementById('startTime').value;
+            var endTimeInput = document.getElementById('endTime').value;
+ 
+            if (startTimeInput && endTimeInput) {
+                var startTime = new Date(startTimeInput);
+                var endTime = new Date(endTimeInput);
+ 
+                if (endTime <= startTime) {
+                    alert('終了時間は開始時間より後に設定してください。');
+                    return false; 
+                }
+            }
+ 
+            return true; 
+        }
+    </script>
+</body>
+</html>
+ 
